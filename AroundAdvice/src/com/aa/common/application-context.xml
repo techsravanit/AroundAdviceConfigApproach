@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+<bean id='calculator' class="com.aa.beans.Calculator"/>
+<bean id='loggingAspect' class="com.aa.aspect.LoggingAspect"/>
+
+<aop:config>
+	<aop:aspect ref="loggingAspect">
+		<aop:around method="log" pointcut="execution(* com.aa.beans.*.*(..))"/>
+		<!-- execution(* com.aa.beans.*.*(..))
+		1st * means any type of return values (int or String or Object).i.e.,
+			execution(int com.aa.beans.*.*(..))
+		2nd Qualified package name: com.aa.beans or we can  put * also i.e.,execution(* *.*.*(..))
+		3rd * means name of the any Class or else we can specified the class also
+			i.e., execution(* com.aa.beans.Calculator.*(..))
+		4th * means any method or we can specify the particular method also
+			i.e.,execution(* com.aa.beans.Calculator.add(..))
+		5th (..) means that any number of parameters. we can execute
+		
+		 -->
+	</aop:aspect>
+</aop:config>
+
+</beans>
